@@ -6,7 +6,6 @@
 #include <assert.h>
 #include "math.h"
 #include <unistd.h>
-#include "sql/sqlite3.h"
 
 using namespace std;
 

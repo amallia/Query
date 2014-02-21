@@ -7,7 +7,6 @@
 #include <iterator>
 #include "pfor.h"
 #include "BlockGens.h"
-#include "sql/sqlite3.h"
 #include "profiling.h"
 
 class onDemandCpool {

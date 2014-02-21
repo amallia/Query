@@ -8,8 +8,8 @@ TYPE=$(PROF)
 TYPE=$(DBG)
 TYPE=$(RLS)
 
-all: main.o pfor.o ListIterator.o profiling.o main.cpp DocidOriented_BMW.o PostingOriented_BMW.o TrecReader.o exhaustiveOR.o sql/sqlite3.o
-	g++ $(TYPE) main.o TrecReader.o pfor.o ListIterator.o profiling.o DocidOriented_BMW.o PostingOriented_BMW.o exhaustiveOR.o sql/sqlite3.o -o main -lpthread
+all: main.o pfor.o ListIterator.o profiling.o main.cpp DocidOriented_BMW.o PostingOriented_BMW.o TrecReader.o exhaustiveOR.o
+	g++ $(TYPE) main.o TrecReader.o pfor.o ListIterator.o profiling.o DocidOriented_BMW.o PostingOriented_BMW.o exhaustiveOR.o -o main -lpthread
 # -ldl 
 clean:
 	rm *.o main
@@ -39,10 +39,6 @@ profiling.o: profiling.cpp 	profiling.h globals.h Makefile
 
 exhaustiveOR.o: exhaustiveOR.h exhaustiveOR.cpp ListIterator.h globals.h utils.h Makefile
 	$(CPPC) exhaustiveOR.cpp	
-
-sql/sqlite3.o: 
-	gcc -c -O3 -DSQLITE_THREADSAFE=2 -DSQLITE_OMIT_LOAD_EXTENSION=1 sql/sqlite3.c -o sql/sqlite3.o
 	   
-
 TIMING=$(STD) -O3 -D TIMING 
 TYPE=$(TIMING)
