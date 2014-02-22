@@ -10,6 +10,7 @@
 #include <limits>
 // #include "globals.h"
 #include <algorithm>
+#include "globals.h"
 
 #define PARANOIC_DEL(p) if(p) delete p; p=0;
 #define PARANOIC_DEL_ARR(p) if(p) delete[] p; p=0;

@@ -11,8 +11,6 @@ TYPE=$(RLS)
 all: main.o pfor.o ListIterator.o profiling.o main.cpp DocidOriented_BMW.o PostingOriented_BMW.o TrecReader.o exhaustiveOR.o
 	g++ $(TYPE) main.o TrecReader.o pfor.o ListIterator.o profiling.o DocidOriented_BMW.o PostingOriented_BMW.o exhaustiveOR.o -o main -lpthread
 # -ldl 
-clean:
-	rm *.o main
 
 CPPC=g++ $(TYPE) -c   
 

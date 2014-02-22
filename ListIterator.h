@@ -1,13 +1,13 @@
 #ifndef _MYFILE_H_
 #define _MYFILE_H_
 
-#include "SqlProxy.h"
 #include <vector>
 #include <algorithm>
 #include <iterator>
 #include "pfor.h"
 #include "BlockGens.h"
 #include "profiling.h"
+#include "globals.h"
 
 class onDemandCpool {
 	// vecUInt data;

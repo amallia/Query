@@ -2,6 +2,7 @@
 #include "globals.h"
 #include "profiling.h"
 #include "utils.h"
+using namespace std;
 
 void ExhaustiveOR::operator() (lptrArray& lps, const int topK, QpResult* res) {
 	// initial sorting by did
