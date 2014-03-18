@@ -282,7 +282,7 @@ void BaseLptr::open(const std::string term, const unsigned int lengthOfLst) {
 	lengthOfList = lengthOfLst + (CONSTS::BS - (unpadded_list_length%CONSTS::BS));
 }
 
-lptr::lptr(CompressedList & cl){
+lptr::lptr(CompressedList & cl){ //by me
 	//--------------------this part corrsponds to load func---------------------------
 	term = cl.term;
 	cpool_leng = cl.cpool_leng;

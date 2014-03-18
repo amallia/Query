@@ -8,14 +8,17 @@ TYPE=$(PROF)
 TYPE=$(DBG)
 TYPE=$(RLS)
 
-all: main.o pfor.o ListIterator.o profiling.o main.cpp DocidOriented_BMW.o PostingOriented_BMW.o TrecReader.o exhaustiveOR.o
-	g++ $(TYPE) main.o TrecReader.o pfor.o ListIterator.o profiling.o DocidOriented_BMW.o PostingOriented_BMW.o exhaustiveOR.o -o main -lpthread
+all: main.o pfor.o ListIterator.o profiling.o main.cpp DocidOriented_BMW.o PostingOriented_BMW.o TrecReader.o exhaustiveOR.o Wand.o
+	g++ $(TYPE) main.o TrecReader.o pfor.o ListIterator.o profiling.o DocidOriented_BMW.o PostingOriented_BMW.o exhaustiveOR.o Wand.o -o main -lpthread
 # -ldl 
 
 CPPC=g++ $(TYPE) -c   
 
 main.o: main.cpp TrecReader.h globals.h Makefile
 	$(CPPC) main.cpp
+
+Wand.o: Wand.h Wand.cpp ListIterator.h globals.h utils.h Makefile
+	$(CPPC) Wand.cpp
 
 PostingOriented_BMW.o: PostingOriented_BMW.h PostingOriented_BMW.cpp ListIterator.h globals.h Makefile
 	$(CPPC) PostingOriented_BMW.cpp

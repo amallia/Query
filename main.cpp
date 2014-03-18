@@ -12,6 +12,7 @@
 #include "TrecReader.h"
 #include "exhaustiveOR.h"
 #include "DocidOriented_BMW.h"
+#include "Wand.h"
 
 using namespace std;
 
@@ -28,8 +29,9 @@ unsigned int* pages;
 pages = Reader.loaddoclen();
 
 // ExhaustiveOR Exhaustive(pages);
+Wand WAND(pages);
 // PostingOriented_BMW PO_BMW(pages);
-DocidOriented_BMW DO_BMW(pages);
+// DocidOriented_BMW DO_BMW(pages);
 
 std::vector<QpResult> results;
 results.reserve(10);
@@ -62,20 +64,20 @@ lps.push_back(&third_lptr);
 
 
 /*Docid Oriented preparation starts*/
-for (int i=0; i<lps.size(); i++){
-  RawIndexList Raw_List = lps_to_RawIndexList(lps[i], pages);
-  injectBlocker(lps[i]->gen, Raw_List);
-}
+// for (int i=0; i<lps.size(); i++){
+//   RawIndexList Raw_List = lps_to_RawIndexList(lps[i], pages);
+//   injectBlocker(lps[i]->gen, Raw_List);
+// }
 
-for (int i=0; i<lps.size(); i++) {
-      int bits;
-      bitOracle(lps[i]->unpadded_list_length, bits); // obtain the number of bits we need for the docID oriented block size based on the list length - Variable block selection schema
-      int num_blocks = (CONSTS::MAXD>>bits) + 1;
-      if (lps[i]->unpadded_list_length < (1<<15)) {  // all lists with length less than 32768 are computed on the fly and we measure the time
-        std::vector<float> max_array (num_blocks, 0.0);
-        on_the_fly_max_array_generation(lps[i], max_array, bits, pages); //repeating works with gen.generatemax function in injectBlocker only for lists less than 32768 (since here we need to record the time for on the fly generation) 
-      }
-}
+// for (int i=0; i<lps.size(); i++) {
+//       int bits;
+//       bitOracle(lps[i]->unpadded_list_length, bits); // obtain the number of bits we need for the docID oriented block size based on the list length - Variable block selection schema
+//       int num_blocks = (CONSTS::MAXD>>bits) + 1;
+//       if (lps[i]->unpadded_list_length < (1<<15)) {  // all lists with length less than 32768 are computed on the fly and we measure the time
+//         std::vector<float> max_array (num_blocks, 0.0);
+//         on_the_fly_max_array_generation(lps[i], max_array, bits, pages); //repeating works with gen.generatemax function in injectBlocker only for lists less than 32768 (since here we need to record the time for on the fly generation) 
+//       }
+// }
 /*Docid Oriented preparation ends*/
 
 
@@ -83,14 +85,15 @@ clock_t init, final;
 init=clock();
 
 /*Docid Oriented BMW output*/
-PriorityArray<QpResult> resultsHeap = DO_BMW(lps,10);
-resultsHeap.sortData();
-  cout<<"Top 10: "<<endl;
-  for(int i=0;i<10;i++)
-    cout<<"Did: "<<resultsHeap.getV()[i].did<<" Score: "<<resultsHeap.getV()[i].score<<endl;
+// PriorityArray<QpResult> resultsHeap = DO_BMW(lps,10);
+// resultsHeap.sortData();
+//   cout<<"Top 10: "<<endl;
+//   for(int i=0;i<10;i++)
+//     cout<<"Did: "<<resultsHeap.getV()[i].did<<" Score: "<<resultsHeap.getV()[i].score<<endl;
 /*Docid Oriented BMW output*/
 
 // Exhaustive(lps, 10, &results[0]);
+WAND(lps, 10, &results[0],0);
 // PO_BMW(lps,10,&results[0]);
 
 final=clock()-init;

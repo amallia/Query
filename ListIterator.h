@@ -135,7 +135,7 @@ class lptr : public BaseLptr {
 public:
 	class comparator {
 	public:
-		inline bool operator()(lptr* a, lptr* b) { return a->did<b->did;} //to sort by list length -- aka comparelps
+		inline bool operator()(lptr* a, lptr* b) { return a->did<b->did;} //to sort by list length -- aka comparelps(I think this is sorted by curdocid)
 	};
 
 	class scorecomparator { // ADDON
